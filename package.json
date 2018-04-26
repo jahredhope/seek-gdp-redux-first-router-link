@@ -1,12 +1,12 @@
 {
-  "name": "redux-first-router-link",
+  "name": "seek-gdp-redux-first-router-link",
   "version": "0.0.0-development",
   "description": "a simple but effective <Link /> component for redux-first-router (better for SEO rather than dispatching yourself)",
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src -d dist",
-    "build:umd": "BABEL_ENV=commonjs NODE_ENV=development webpack src/Link.js dist/redux-first-router-link.js",
-    "build:umd:min": "BABEL_ENV=commonjs NODE_ENV=production webpack src/Link.js dist/redux-first-router-link.min.js",
+    "build:umd": "BABEL_ENV=commonjs NODE_ENV=development webpack src/Link.js dist/seek-gdp-redux-first-router-link.js",
+    "build:umd:min": "BABEL_ENV=commonjs NODE_ENV=production webpack src/Link.js dist/seek-gdp-redux-first-router-link.min.js",
     "flow-copy": "flow-copy-source src dist",
     "flow-watch": "clear; printf \"\\033[3J\" & npm run flow & fswatch -o ./ | xargs -n1 -I{} sh -c 'clear; printf \"\\033[3J\" && npm run flow'",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
@@ -21,19 +21,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/faceyspacey/redux-first-router-link.git"
+    "url": "https://github.com/seekinternational-oss/seek-gdp-redux-first-router-link.git"
   },
-  "author": "James Gillmore <james@faceyspacey.com>",
+  "author": "James Gillmore <james@seekinternational-oss.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/faceyspacey/redux-first-router-link/issues"
+    "url": "https://github.com/seekinternational-oss/seek-gdp-redux-first-router-link/issues"
   },
-  "homepage": "https://github.com/faceyspacey/redux-first-router-link#readme",
+  "homepage": "https://github.com/seekinternational-oss/seek-gdp-redux-first-router-link#readme",
   "jest": {
     "verbose": true,
     "moduleFileExtensions": [
       "js"
     ]
+  },
+  "release": {
+    "verifyConditions": "condition-circle"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -46,6 +49,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "commitizen": "^2.9.6",
+    "condition-circle": "~1.5.0",
     "cz-conventional-changelog": "^2.0.0",
     "eslint": "^4.4.1",
     "eslint-config-airbnb": "^15.1.0",
@@ -64,7 +68,7 @@
     "react-redux": "^5.x",
     "react-test-renderer": "^15.6.1",
     "redux": "^3.x",
-    "redux-first-router": "next",
+    "seek-gdp-redux-first-router": "*",
     "rimraf": "^2.6.1",
     "semantic-release": "^7.0.1",
     "travis-github-status": "^1.6.3",
@@ -74,7 +78,7 @@
     "react": "*",
     "react-redux": "*",
     "redux": "*",
-    "redux-first-router": "*"
+    "seek-gdp-redux-first-router": "*"
   },
   "config": {
     "commitizen": {
