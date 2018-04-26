@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import type { Store } from 'redux'
 import type { Connector } from 'react-redux'
 import matchPath from 'rudy-match-path'
-import { selectLocationState } from 'redux-first-router'
+import { selectLocationState } from 'seek-gdp-redux-first-router'
 
 import { Link } from './Link'
 import toUrl from './toUrl'

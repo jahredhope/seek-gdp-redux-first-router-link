@@ -1,7 +1,7 @@
 // @flow
 
-import { actionToPath, getOptions } from 'redux-first-router'
-import type { RoutesMap } from 'redux-first-router'
+import { actionToPath, getOptions } from 'seek-gdp-redux-first-router'
+import type { RoutesMap } from 'seek-gdp-redux-first-router'
 
 export type To = string | Array<string> | Object
 

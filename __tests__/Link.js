@@ -1,4 +1,4 @@
-import { NOT_FOUND } from 'redux-first-router'
+import { NOT_FOUND } from 'seek-gdp-redux-first-router'
 import createLink, { event } from '../__test-helpers__/createLink'
 
 test('ON_CLICK: dispatches location-aware action', () => {

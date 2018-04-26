@@ -1,4 +1,4 @@
-import { NOT_FOUND } from 'redux-first-router'
+import { NOT_FOUND } from 'seek-gdp-redux-first-router'
 import { createNavLink, event } from '../__test-helpers__/createLink'
 
 test('NON-EXACT: show active class', () => {

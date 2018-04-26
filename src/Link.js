@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import type { Store } from 'redux'
 import type { Connector } from 'react-redux'
-import { selectLocationState } from 'redux-first-router'
+import { selectLocationState } from 'seek-gdp-redux-first-router'
 
 import toUrl from './toUrl'
 import handlePress from './handlePress'

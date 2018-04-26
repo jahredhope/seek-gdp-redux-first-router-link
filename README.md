@@ -75,12 +75,12 @@ In all **3 cases**, a simple link will be rendered, eg:
 import { NavLink } from 'redux-first-router-link'
 
 <NavLink
-  to={{ type: 'LIST', payload: { category: 'redux-first-router' } }}
+  to={{ type: 'LIST', payload: { category: 'seek-gdp-redux-first-router' } }}
   activeClassName='active'
   activeStyle={{ color: 'purple' }}
   exact={true}
   strict={true}
-  isActive={(match, location) => location.payload.category === 'redux-first-router'}
+  isActive={(match, location) => location.payload.category === 'seek-gdp-redux-first-router'}
 >
   Redux First Router
 </NavLink>
@@ -99,7 +99,7 @@ For example, if you have:
 ```javascript
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux'
 import createBrowserHistory from 'history/createBrowserHistory'
-import connectRoutes from 'redux-first-router'
+import connectRoutes from 'seek-gdp-redux-first-router'
 
 const history = createBrowserHistory()
 
