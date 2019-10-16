@@ -25,7 +25,7 @@ export default (
 
   const prevented = e.defaultPrevented
 
-  if (!target && e && e.preventDefault && !isModified(e)) {
+  if (e.button !== 1 && !target && e && e.preventDefault && !isModified(e)) {
     e.preventDefault()
   }
 
@@ -38,7 +38,17 @@ export default (
     !isModified(e)
   ) {
     const { querySerializer: serializer } = getOptions()
-    let action = isAction(to) ? to : pathToAction(url, routesMap, serializer)
+    let action = to
+
+    if (!isAction(to)) {
+      url =
+        url.indexOf('#') > -1
+          ? url.substring(url.indexOf('#') + 1, url.length)
+          : url
+
+      action = pathToAction(url, routesMap, serializer)
+    }
+
     action = dispatchRedirect ? redirect(action) : action
     dispatch(action)
   }

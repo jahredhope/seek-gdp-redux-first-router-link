@@ -2,13 +2,12 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
-import createHistory from 'history/createMemoryHistory'
 import { connectRoutes } from 'seek-gdp-redux-first-router'
 
 import Link from '../src/Link'
 import NavLink from '../src/NavLink'
 
-const createLink = (props, initialPath) => {
+const createLink = (props, initialPath, options) => {
   const isNavLink = !!initialPath
   const link = isNavLink ? <NavLink {...props} /> : <Link {...props} />
 
@@ -17,16 +16,18 @@ const createLink = (props, initialPath) => {
     SECOND: '/second/:param'
   }
 
-  const history = createHistory({
+  const { middleware, enhancer, reducer } = connectRoutes(routesMap, {
     initialEntries: [initialPath || '/'],
     initialIndex: 0,
-    keyLength: 6
+    keyLength: 6,
+    ...options
   })
 
-  const { middleware, enhancer, reducer } = connectRoutes(history, routesMap)
-
   const middlewares = applyMiddleware(middleware)
-  const enhancers = compose(enhancer, middlewares)
+  const enhancers = compose(
+    enhancer,
+    middlewares
+  )
   const rootReducer = (state = {}, action = {}) => ({
     location: reducer(state.location, action)
   })

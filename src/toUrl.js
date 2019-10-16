@@ -6,20 +6,27 @@ import type { RoutesMap } from 'seek-gdp-redux-first-router'
 export type To = string | Array<string> | Object
 
 export default (to?: ?To, routesMap: RoutesMap): string => {
+  const { querySerializer, basename } = getOptions()
+
   if (to && typeof to === 'string') {
-    return to
-  }
-  else if (Array.isArray(to)) {
-    return `/${to.join('/')}`
-  }
-  else if (typeof to === 'object') {
+    return history().createHref({
+      pathname: to
+    })
+  } else if (Array.isArray(to)) {
+    const path = `/${to.join('/')}`
+    return history().createHref({
+      pathname: path
+    })
+  } else if (typeof to === 'object') {
     const action = to
 
     try {
-      const { querySerializer } = getOptions()
-      return actionToPath(action, routesMap, querySerializer)
-    }
-    catch (e) {
+      const path = actionToPath(action, routesMap, querySerializer)
+
+      return history().createHref({
+        pathname: path
+      })
+    } catch (e) {
       if (process.env.NODE_ENV === 'development') {
         console.warn(
           '[redux-first-router-link] could not create path from action:',

@@ -1,4 +1,5 @@
 import { NOT_FOUND } from 'seek-gdp-redux-first-router'
+import { createHashHistory } from 'rudy-history'
 import createLink, { event } from '../__test-helpers__/createLink'
 
 test('ON_CLICK: dispatches location-aware action', () => {
@@ -196,4 +197,64 @@ it('supports custom HTML tag name which is still a link', () => {
   }) /*? $.tree */
 
   expect(tree).toMatchSnapshot()
+})
+
+test('with basename options generates url with basename', () => {
+  const options = { basename: '/base-foo' }
+  const { tree, store } = createLink(
+    {
+      to: '/first',
+      children: 'CLICK ME'
+    },
+    '/',
+    options
+  )
+
+  expect(tree.props.href).toEqual('/base-foo/first')
+})
+
+test('with hash history', () => {
+  const options = { createHistory: createHashHistory }
+  const to = '/first'
+  const { tree, store } = createLink(
+    {
+      to,
+      children: 'CLICK ME'
+    },
+    null,
+    options
+  )
+  expect(tree).toMatchSnapshot()
+
+  tree.props.onClick(event)
+
+  const { location } = store.getState() /*? $.location */
+
+  expect(tree.props.href).toEqual('#/first')
+  expect(location.pathname).toEqual('/first')
+  expect(location.type).toEqual('FIRST')
+})
+
+test('with hash history and with basename', () => {
+  const options = { createHistory: createHashHistory, basename: '/base-foo' }
+  const to = '/first'
+  window.location.hash = '#/base-foo'
+  const { tree, store } = createLink(
+    {
+      to,
+      children: 'CLICK ME'
+    },
+    null,
+    options
+  )
+
+  expect(tree).toMatchSnapshot()
+
+  tree.props.onClick(event)
+
+  const { location } = store.getState() /*? $.location */
+
+  expect(tree.props.href).toEqual('#/base-foo/first')
+  expect(location.pathname).toEqual('/first')
+  expect(location.type).toEqual('FIRST')
 })

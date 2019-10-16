@@ -1,12 +1,11 @@
 // @flow
 
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import type { Store } from 'redux'
 import type { Connector } from 'react-redux'
 import matchPath from 'rudy-match-path'
 import { selectLocationState } from 'seek-gdp-redux-first-router'
+import { stripBasename } from 'rudy-history/PathUtils'
 
 import { Link } from './Link'
 import toUrl from './toUrl'
@@ -35,36 +34,36 @@ type OwnProps = {
 }
 
 type Props = {
-  dispatch: Function,
-  pathname: string
+  location: any
 } & OwnProps
 
-type Context = {
-  store: Store<*, *>
-}
-
-const NavLink = (
-  {
-    to,
-    href,
-    pathname,
-    className,
-    style,
-    activeClassName = 'active',
-    activeStyle,
-    ariaCurrent = 'true',
-    exact,
-    strict,
-    isActive,
-    ...props
-  }: Props,
-  { store }: Context
-) => {
+const NavLink = ({
+  to,
+  href,
+  location,
+  className,
+  style,
+  activeClassName = 'active',
+  activeStyle,
+  ariaCurrent = 'true',
+  exact,
+  strict,
+  isActive,
+  ...props
+}: Props) => {
   to = href || to
 
-  const location = selectLocationState(store.getState())
+  const options = getOptions()
+  const basename = options.basename ? options.basename : ''
+
   const path = toUrl(to, location.routesMap).split('?')[0]
-  const match = matchPath(pathname, { path, exact, strict })
+
+  const match = matchPath(location.pathname, {
+    path: stripBasename(path, basename),
+    exact,
+    strict
+  })
+
   const active = !!(isActive ? isActive(match, location) : match)
 
   const combinedClassName = active
@@ -79,16 +78,13 @@ const NavLink = (
       className={combinedClassName}
       style={combinedStyle}
       aria-current={active && ariaCurrent}
+      routesMap={location.routesMap}
       {...props}
     />
   )
 }
 
-NavLink.contextTypes = {
-  store: PropTypes.object.isRequired
-}
-
-const mapState = state => ({ pathname: selectLocationState(state).pathname })
+const mapState = state => ({ location: selectLocationState(state) })
 const connector: Connector<OwnProps, Props> = connect(mapState)
 
 // $FlowIgnore

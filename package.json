@@ -16,14 +16,17 @@
     "format": "prettier --single-quote --parser=flow --semi=false --write '{src,__tests__,__test-helpers__}/**/*.js' && npm run lint",
     "precommit": "lint-staged --verbose && npm test",
     "cm": "git-cz",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "prepublish": "npm run clean && npm run build && npm run flow-copy && npm run build:umd && npm run build:umd:min"
+    "semantic-release": "npx semantic-release",
+    "prepublishOnly": "npm run clean && npm run build && npm run flow-copy && npm run build:umd && npm run build:umd:min"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/seekinternational-oss/seek-gdp-redux-first-router-link.git"
   },
-  "author": "James Gillmore <james@seekinternational-oss.com>",
+  "author": "James Gillmore <james@faceyspacey.com>",
+  "maintainers": [
+    "Zackary Jackson <zack@ScriptedAlchemy.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/seekinternational-oss/seek-gdp-redux-first-router-link/issues"
@@ -59,7 +62,6 @@
     "eslint-plugin-react": "^7.2.1",
     "flow-bin": "^0.52.0",
     "flow-copy-source": "^1.2.0",
-    "history": "^4.6.3",
     "husky": "^0.14.3",
     "jest": "^20.0.4",
     "lint-staged": "^4.0.3",
@@ -70,7 +72,7 @@
     "redux": "^3.x",
     "seek-gdp-redux-first-router": "*",
     "rimraf": "^2.6.1",
-    "semantic-release": "^7.0.1",
+    "semantic-release": "^15.12.4",
     "travis-github-status": "^1.6.3",
     "webpack": "3.5.5"
   },
@@ -94,7 +96,8 @@
   },
   "dependencies": {
     "path-to-regexp": "^1.7.0",
-    "prop-types": "15.5.10",
+    "prop-types": "^15.5.10",
+    "rudy-history": "^1.0.0",
     "rudy-match-path": "^0.3.0"
   }
 }
